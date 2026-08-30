@@ -1,0 +1,8 @@
+android/
+server/node_modules/
+server/dist/
+server/.env
+.git/
+.gitignore
+.gitattributes
+*.md

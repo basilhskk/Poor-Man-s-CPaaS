@@ -1,0 +1,21 @@
+{
+  "name": "poor-mans-cpaas",
+  "private": true,
+  "scripts": {
+    "server:dev": "npm --prefix server run dev",
+    "server:build": "npm --prefix server run build",
+    "server:install": "npm --prefix server install",
+    "ui:dev": "npm --prefix ui run dev",
+    "ui:build": "npm --prefix ui run build",
+    "ui:install": "npm --prefix ui install",
+    "db:generate": "npm --prefix server run db:generate",
+    "db:migrate": "npm --prefix server run db:migrate",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f server",
+    "docker:reset": "docker compose down -v",
+    "demo:send": "sh scripts/demo-send.sh",
+    "demo:receive": "sh scripts/demo-receive.sh",
+    "demo:receive-adb": "sh scripts/demo-receive-adb.sh"
+  }
+}

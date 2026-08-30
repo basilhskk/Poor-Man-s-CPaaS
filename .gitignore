@@ -1,0 +1,28 @@
+# Android
+android/.gradle/
+android/build/
+android/local.properties
+android/.idea/
+android/*.iml
+android/captures/
+android/.externalNativeBuild/
+android/.cxx/
+*.keystore
+!debug.keystore
+
+# Node
+server/node_modules/
+server/dist/
+server/public/
+server/.env
+ui/node_modules/
+ui/dist/
+
+# Misc
+.DS_Store
+*.log
+
+# IDEs
+.idea/
+.vscode/
+.claude/

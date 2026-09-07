@@ -5,6 +5,10 @@ on:
     tags:
       - "v*.*.*"
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish this build under, e.g. v0.1.0 (must not already exist)"
+        required: true
 
 permissions:
   contents: write
@@ -30,11 +34,12 @@ jobs:
         working-directory: android
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 -d > release.jks
 
-      - name: Derive version from tag
+      - name: Derive version and tag
         id: version
         run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          echo "name=$TAG" >> "$GITHUB_OUTPUT"
+          TAG="${{ inputs.tag || github.ref_name }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "name=${TAG#v}" >> "$GITHUB_OUTPUT"
           echo "code=$GITHUB_RUN_NUMBER" >> "$GITHUB_OUTPUT"
 
       - name: Build signed release APK
@@ -56,5 +61,6 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
           files: android/app/build/outputs/apk/release/app-release.apk
           generate_release_notes: true

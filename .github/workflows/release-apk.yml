@@ -45,7 +45,7 @@ jobs:
       - name: Build signed release APK
         working-directory: android
         env:
-          ANDROID_KEYSTORE_PATH: release.jks
+          ANDROID_KEYSTORE_PATH: ${{ github.workspace }}/android/release.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
@@ -58,7 +58,7 @@ jobs:
         run: |
           APK=app/build/outputs/apk/release/app-release.apk
           if [ ! -f "$APK" ]; then
-            echo "::error::$APK not found — ANDROID_KEYSTORE_* secrets are probably unset, so the build produced an unsigned APK under a different filename instead."
+            echo "::error::$APK not found — either ANDROID_KEYSTORE_* secrets are unset (build produced an unsigned APK under a different filename) or signing was misconfigured. Check the build log above."
             ls -la app/build/outputs/apk/release/ || true
             exit 1
           fi

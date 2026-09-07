@@ -53,6 +53,16 @@ jobs:
           ANDROID_VERSION_CODE: ${{ steps.version.outputs.code }}
         run: ./gradlew :app:assembleRelease
 
+      - name: Verify APK is signed
+        working-directory: android
+        run: |
+          APK=app/build/outputs/apk/release/app-release.apk
+          if [ ! -f "$APK" ]; then
+            echo "::error::$APK not found — ANDROID_KEYSTORE_* secrets are probably unset, so the build produced an unsigned APK under a different filename instead."
+            ls -la app/build/outputs/apk/release/ || true
+            exit 1
+          fi
+
       - name: Clean up keystore
         if: always()
         working-directory: android

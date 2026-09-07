@@ -11,7 +11,11 @@ You run a cheap Node.js server. You plug in an Android phone with a SIM card. Yo
 
 ### Try it now
 
-[**Download the latest APK**](https://github.com/basilhskk/Poor-Man-s-CPaaS/releases/latest) — install it, register an account against a running server, add your phone as a device, and send yourself a test message. Your own SIM sends the SMS; the server just relays the job.
+1. [**Download the latest APK**](https://github.com/basilhskk/Poor-Man-s-CPaaS/releases/latest) and install it on your Android phone.
+2. Register an account at **[pmt.valkorlabs.com](https://pmt.valkorlabs.com)** — a live instance of this server, no setup required.
+3. Add your phone as a device from the web UI, point the app at the server URL + API key, and send yourself a test message.
+
+Your own SIM sends the SMS; the server just relays the job. Prefer to run your own instance instead? See the [Quick start](#quick-start) below.
 
 
 <details>
